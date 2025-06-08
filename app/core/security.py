@@ -3,9 +3,10 @@ from fastapi import HTTPException
 from jose import jwt,JWTError
 from datetime import timedelta, datetime
 from starlette import status
+from app.core.config import settings
 
-SECRET_KEY =
-ALGORITHM =
+SECRET_KEY =settings.SECRET_KEY
+ALGORITHM = settings.ALGORITHM
 
 def create_access_token(username:str,user_id:int,expires_delta:timedelta):
     encode = {'sub':username, 'id': user_id}
