@@ -4,8 +4,8 @@ from jose import jwt,JWTError
 from datetime import timedelta, datetime
 from starlette import status
 
-SECRET_KEY = '42c2178e11be0850eb63661091a786417c8120faf374cacaf93b651220ce18f1'
-ALGORITHM = 'HS256'
+SECRET_KEY =
+ALGORITHM =
 
 def create_access_token(username:str,user_id:int,expires_delta:timedelta):
     encode = {'sub':username, 'id': user_id}
