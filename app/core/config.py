@@ -1,6 +1,13 @@
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
+    """
+    Application configuration class.
+
+    Loads environment variables from the .env file using Pydantic's BaseSettings.
+    This ensures that all sensitive or environment-specific values are decoupled
+    from the source code and loaded dynamically at runtime.
+    """
     SECRET_KEY:str
     ALGORITHM:str
     ACCESS_TOKEN_EXPIRE_MINUTES:int

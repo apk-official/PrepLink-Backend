@@ -1,29 +1,20 @@
-from fastapi import FastAPI, status, Depends, HTTPException
-from typing import Annotated
-from sqlalchemy.orm import Session
+from fastapi import FastAPI
 from app.db.session import engine
-from app.db.session import SessionLocal
 from app.db.base import Base
 from app.api import auth
-from app.api.auth import get_current_user
+from app.api import user
 
-app = FastAPI()
-app.include_router(auth.router)
+# Create FastAPI app instance
+app = FastAPI(
+    title="Interview Prep API",
+    version="1.0.0",
+)
 
+##API routers with versioned(v1) URL prefixes
+app.include_router(auth.router,prefix="/api/v1")
+app.include_router(user.router, prefix="/api/v1")
+
+# Create database tables on startup (based on SQLAlchemy models)
 Base.metadata.create_all(bind=engine)
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
-db_dependency = Annotated[Session, Depends(get_db)]
-user_dependency = Annotated[dict, Depends(get_current_user)]
-
-@app.get("/",status_code=status.HTTP_200_OK)
-async def user(user: user_dependency,db:db_dependency):
-    if user is None:
-        raise HTTPException(status_code=401,detail='Authentication Failed')
-    return {"User":user}
