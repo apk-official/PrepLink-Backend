@@ -17,10 +17,10 @@ class UserOut(BaseModel):
 
         Attributes:
             username (str): The registered username.
-            password (str): The hashed password (not typically returned — consider omitting).
+            id (int): The hashed password (not typically returned — consider omitting).
      """
     username:str
-    password:str
+    id:int
     model_config = {
         "from_attributes": True
     }

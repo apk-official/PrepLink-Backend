@@ -55,4 +55,4 @@ async def user(current_user: user_dependency,db:db_dependency):
         """
     if current_user is None:
         raise HTTPException(status_code=401,detail='Authentication Failed')
-    return {"User":current_user}
+    return current_user
