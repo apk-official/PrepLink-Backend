@@ -52,9 +52,8 @@ This results in tailored **interview questions & answers, preparation tips, and 
 - Service-based architecture (clean separation of concerns)
 
 ### Frontend
-- React / Next.js
-- Auth-aware dashboards
-- Interview prep workspace UI
+
+👉 **[View Frontend Repository](https://github.com/apk-official/Preplink-Frontend)**
 
 ---
 ## 🔐 Authentication (Implemented)
