@@ -2,16 +2,32 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
+    # ----------------
+    # --JWT Settings--
+    # ----------------
     SECRET_KEY:str
     ALGORITHM:str
-    ACCESS_TOKEN_EXPIRE_MINUTES:int
+    ACCESS_TOKEN_EXPIRE_MINUTES:int=15
+    REFRESH_TOKEN_EXPIRE_DAYS:int=7
+    # ------------
+    # --Database--
+    # ------------
     POSTGRES_USER:str
     POSTGRES_PASSWORD:str
     POSTGRES_SERVER:str
     POSTGRES_PORT:str
     POSTGRES_DB:str
+    # --------------------------
+    # --Google Authentication--
+    # --------------------------
     GOOGLE_CLIENT_ID:str
     GOOGLE_CLIENT_SECRET:str
+    GOOGLE_REDIRECT_URI:str="http://localhost:8000/api/v1/auth/google/callback"
+
+    FRONTEND_URL:str="http://localhost:5173/"
+
+    MAX_FILE_SIZE:int=7*1024*1024
+
 
     model_config = SettingsConfigDict(
         env_file='.env',

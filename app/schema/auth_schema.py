@@ -1,10 +1,11 @@
-from typing import Optional
 from pydantic import BaseModel
 
 
-class Token(BaseModel):
+class TokenResponse(BaseModel):
     access_token:str
-    token_type:str
+    refresh_token:str
+    token_type:str= "bearer"
+    expires_in:int
 
-class TokenData(BaseModel):
-    username:Optional[str] = None
+class RefreshTokenRequest(BaseModel):
+    refresh_token:str
