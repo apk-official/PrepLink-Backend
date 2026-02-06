@@ -23,8 +23,13 @@ def valid_base_url(url:HttpUrl)->str:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,detail="Private or Internal ips are not allowed")
     except ValueError:
         pass
-    base_url=f"{parsed.scheme}//{hostname}"
+    base_url=f"{parsed.scheme}://{hostname}"
     if parsed.port:
         base_url+=f":{parsed.port}"
     return base_url
 
+def infer_company_name(url: str) -> str:
+    host = urlparse(url).netloc
+    host = host.replace("www.", "")
+    base = host.split(".")[0]
+    return base.capitalize()

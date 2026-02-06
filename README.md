@@ -5,7 +5,7 @@
 
 ---
 
-## 🚧 Project Status: In Active Development
+##Project Status: In Active Development
 
 PrepLink is currently **under development**.  
 Core authentication, backend architecture, and data models are being actively built.
@@ -14,7 +14,7 @@ Features, UI, and APIs are evolving rapidly — expect breaking changes.
 
 ---
 
-## ✨ What is PrepLink?
+## What is PrepLink?
 
 PrepLink is an **AI-assisted interview preparation platform** designed to help candidates:
 
@@ -26,7 +26,7 @@ The goal is to move beyond generic Q&A — and provide a **centralised, intellig
 
 ---
 
-## 🔍 Problem It Solves
+## Problem It Solves
 
 Most candidates get generic AI interview prep with little company or role context.
 
@@ -41,7 +41,7 @@ This results in tailored **interview questions & answers, preparation tips, and 
 
 ---
 
-## 🏗️ Current Architecture (Early)
+## Current Architecture (Early)
 
 ### Backend
 - **FastAPI** (Python)
@@ -56,7 +56,7 @@ This results in tailored **interview questions & answers, preparation tips, and 
 👉 **[View Frontend Repository](https://github.com/apk-official/Preplink-Frontend)**
 
 ---
-## 🔐 Authentication (Implemented)
+##  Authentication (Implemented)
 
 - Google OAuth login
 - JWT-based session handling
@@ -64,7 +64,7 @@ This results in tailored **interview questions & answers, preparation tips, and 
 
 ---
 
-## 🧩 Core Concepts (Planned)
+##  Core Concepts (Planned)
 
 - Interview prep projects (company + role)
 - Tailored Question & answer
@@ -72,7 +72,7 @@ This results in tailored **interview questions & answers, preparation tips, and 
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **Python 3.7**
 - **FastAPI**
@@ -85,7 +85,7 @@ This results in tailored **interview questions & answers, preparation tips, and 
 
 ---
 
-## 📦 Repository Structure (Backend)
+##  Repository Structure (Backend)
 app/   
 ├── api/  # Route definitions  
 ├── core/ # Config, security, dependencies  
@@ -96,7 +96,7 @@ app/
 └── main.py # Application entry point
 ---
 
-## 🚀 Getting Started (Development)
+##  Getting Started (Development)
 
 > Detailed setup instructions will be added once the backend stabilizes.
 
@@ -107,19 +107,19 @@ For now:
 - PostgreSQL required
 
 ---
-## 🧭 Roadmap (High-Level)
+##  Roadmap (High-Level)
 
 - [x] Backend foundation
 - [x] Google authentication
 - [x] User management
-- [ ] Interview project model
-- [ ] Question & answer workflows
-- [ ] AI integration
+- [x] Interview project model
+- [x] Question & answer workflows
+- [x] AI integration
 - [ ] Deployment & CI
 
 ---
 
-## 🤝 Contributing
+##  Contributing
 
 PrepLink is currently a **personal / early-stage project**.  
 Contribution guidelines will be added later.

@@ -27,7 +27,10 @@ class Settings(BaseSettings):
     FRONTEND_URL:str="http://localhost:5173/"
 
     MAX_FILE_SIZE:int=7*1024*1024
-
+    # --------------------------
+    # --Google GEMINI API--
+    # --------------------------
+    GOOGLE_GEMINI_API_KEY:str
 
     model_config = SettingsConfigDict(
         env_file='.env',
