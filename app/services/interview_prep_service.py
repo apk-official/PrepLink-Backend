@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 from app.db.prep_db import PrepDB
 from app.models.company import Company
 from app.models.company_pages import CompanyPages
+from app.models.user import User
 from app.services.auth_services import AuthService
 from app.services.prompt_service import PromptService
 from app.services.scrape_service import get_scraped_data
@@ -33,10 +34,12 @@ class InterviewPrep:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail="Unauthorised Access")
         pages_rows: List[CompanyPages] = []
         company = db.query(Company).filter(Company.url==url).first()
-
-        company_data = None
+        print(payload)
+        user = db.query(User).filter(User.user_id==payload.get("sub")).first()
+        if user.credits<0:
+            raise HTTPException(status_code=status.HTTP_402_PAYMENT_REQUIRED,detail="You have run out of credits")
         if company is not None:
-            company_data = cast(
+            pages_rows = cast(
                 List[CompanyPages],
                 db.query(CompanyPages).filter(CompanyPages.company_id == company.company_id).all()
             )
@@ -45,7 +48,6 @@ class InterviewPrep:
             allow_scrape_tos = await InterviewPrep.site_complaince(url)
             if allow_scrape_tos:
                 scraped =await get_scraped_data(url)
-                company_data = scraped
                 scraped_data = scraped.get("company_data",scraped)
                 pages = scraped_data.get("pages",[])
                 name_guess = scraped_data.get("company_name_guess")
@@ -55,7 +57,7 @@ class InterviewPrep:
                 db.add(new_company)
                 db.commit()
                 db.refresh(new_company)
-
+                company = new_company
                 now = datetime.now(timezone.utc).isoformat()
                 for p in pages:
                     page_url = p.get("url")

@@ -7,6 +7,7 @@ from typing import Annotated
 from fastapi import Depends, Request, APIRouter, HTTPException
 from authlib.integrations.starlette_client import OAuth
 from app.core.config import settings
+from app.core.ratelimit import limiter
 from app.db.helper import get_db
 from app.models.user import User
 from app.models.user_auth import UserAuth
@@ -28,12 +29,14 @@ oauth.register(
 
 # Initiate Google OAuth login
 @router.get('/google')
+@limiter.limit("5/minute")
 async def auth_google(request:Request):
     redirect_uri=settings.GOOGLE_REDIRECT_URI
     return await oauth.google.authorize_redirect(request, redirect_uri)
 
 
 @router.get('/google/callback')
+@limiter.limit("5/minute")
 async def google_callback(request:Request,db:Session=Depends(get_db)):
     # Handle Google OAuth callback
     try:
@@ -74,6 +77,7 @@ async def google_callback(request:Request,db:Session=Depends(get_db)):
 
 
 @router.post("/refresh",response_model=TokenResponse)
+@limiter.limit("5/minute")
 async def refresh_access_tokens(
         refresh_request:RefreshTokenRequest,
         db: Session = Depends(get_db)
@@ -116,6 +120,7 @@ async def refresh_access_tokens(
     )
 
 @router.post("/logout")
+@limiter.limit("5/minute")
 async def logout(refresh_request:RefreshTokenRequest,db:Session=Depends(get_db)):
     """Logout endpoint - invalidates refresh token"""
     payload = AuthService.verify_token(refresh_request.refresh_token,token_type="refresh")

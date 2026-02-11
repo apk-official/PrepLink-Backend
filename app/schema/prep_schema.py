@@ -26,5 +26,5 @@ class TipItem(BaseModel):
 class InterviewPrepResponse(BaseModel):
     job_position: str
     interview_qa: InterviewQA
-    Tips: List[TipItem]
-    About_company: AboutCompany
+    tips: List[TipItem]
+    about_company: AboutCompany

@@ -119,8 +119,8 @@ You will be provided with three data blocks:
 2. **Technical Section**: Deep-dive questions based on the specific skills in the Job Description.
 3. **Behavioral Section**: STAR-method questions (e.g., "Tell me about a time you failed").
 4. **Other Section**: Role-specific "wildcard" questions (e.g., "How do you handle a rush?" for retail, or "System design" for tech).
-5. **Source Attribution**: For 'Tips' and 'About_company', you MUST provide the 'source_url' from the <COMPANY_DATA>.
-6."Ensure all 'answer', 'content', and 'tip' fields are fully populated with detailed text."
+5. **Source Attribution**: For 'About_company', you MUST provide the 'source_url' from the <COMPANY_DATA>.
+6.**Ensure all 'answer', 'content', and 'tip' fields are fully populated with detailed text.
 
 ## CONVERSATIONAL GUIDELINES
 - QUESTIONS MUST BE NATURAL: Do not mention "The Job Description" or "The Resume." 
@@ -238,18 +238,20 @@ You will be provided with three data blocks:
 ## OUTPUT FORMAT
 Return strictly valid JSON matching this schema:
 {
-  "job_position":str,
+  "job_position": "string",
   "interview_qa": {
-    "General": [{"question": str, "answer": str}],
-    "Technical": [{"question": str, "answer": str}],
-    "Behavioural": [{"question": str, "answer": str}],
-    "Other": [{"question": str, "answer": str}]
+    "General": [{"question":"...", "answer":"..."}],
+    "Technical": [{"question":"...", "answer":"..."}],
+    "Behavioural": [{"question":"...", "answer":"..."}],
+    "Other": [{"question":"...", "answer":"..."}]
   },
-  "Tips": [{"tip": str, "source_url": str}],
+  "Tips": [
+    {"tip": "..."},
+  ],
   "About_company": {
-    "mission": {"content": str, "source_url": str},
-    "vision": {"content": str, "source_url": str},
-    "additional": {"content": str, "source_url": str}
+    "mission": {"content":"...", "source_url":"..."},
+    "vision": {"content":"...", "source_url":"..."},
+    "additional": {"content":"...", "source_url":"..."}
   }
 }
 """
