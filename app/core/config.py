@@ -22,9 +22,9 @@ class Settings(BaseSettings):
     # --------------------------
     GOOGLE_CLIENT_ID:str
     GOOGLE_CLIENT_SECRET:str
-    GOOGLE_REDIRECT_URI:str="http://localhost:8000/api/v1/auth/google/callback"
+    GOOGLE_REDIRECT_URI:str="https://app.preplinkapp.com/api/v1/auth/google/callback"
 
-    FRONTEND_URL:str="http://localhost:5173/"
+    FRONTEND_URL:str="https://app.preplinkapp.com"
 
     MAX_FILE_SIZE:int=7*1024*1024
     # --------------------------
