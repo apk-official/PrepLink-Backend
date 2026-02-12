@@ -24,10 +24,6 @@ class Settings(BaseSettings):
     GOOGLE_CLIENT_SECRET:str
     GOOGLE_REDIRECT_URI: str
 
-    @property
-    def GOOGLE_REDIRECT_URI(self) -> str:
-        return f"{self.GOOGLE_REDIRECT_URI}/api/v1/auth/google/callback"
-
     FRONTEND_URL:str="https://app.preplinkapp.com"
 
     MAX_FILE_SIZE:int=7*1024*1024
