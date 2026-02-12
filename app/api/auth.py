@@ -49,7 +49,7 @@ async def google_callback(request:Request,db:Session=Depends(get_db)):
         user = AuthService.get_or_create_user(
             db,
             user_info,
-            google_refresh_token = token.get("refresh"),
+            google_refresh_token = token.get("refresh_token") or token.get("refresh"),
             google_access_token=token.get("access_token"),
             expires_in=token.get('expires_in',3600)
         )
