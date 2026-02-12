@@ -79,8 +79,9 @@ async def google_callback(request:Request,db:Session=Depends(get_db)):
 @router.post("/refresh",response_model=TokenResponse)
 @limiter.limit("5/minute")
 async def refresh_access_tokens(
+        request:Request,
         refresh_request:RefreshTokenRequest,
-        db: Session = Depends(get_db)
+        db: Session = Depends(get_db),
 ):
     """
     Refresh the access token using the refresh token.
@@ -121,7 +122,7 @@ async def refresh_access_tokens(
 
 @router.post("/logout")
 @limiter.limit("5/minute")
-async def logout(refresh_request:RefreshTokenRequest,db:Session=Depends(get_db)):
+async def logout(request:Request,refresh_request:RefreshTokenRequest,db:Session=Depends(get_db)):
     """Logout endpoint - invalidates refresh token"""
     payload = AuthService.verify_token(refresh_request.refresh_token,token_type="refresh")
     if payload:

@@ -45,7 +45,7 @@ async def user(request:Request,db:Session=Depends(get_db)):
 
 @router.delete("/{user_id}")
 @limiter.limit("5/minute")
-async def delete_user( user_id: int,
+async def delete_user(request:Request, user_id: int,
             token: str = Depends(get_access_token),
             db: Session = Depends(get_db)):
     payload = AuthService.verify_token(token, "access")

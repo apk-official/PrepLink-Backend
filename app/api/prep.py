@@ -20,7 +20,7 @@ router = APIRouter(prefix="/prep",tags=["interview-prep"])
 
 @router.post("/")
 @limiter.limit("5/minute")
-async def interview_prep(resume:UploadFile=File(...), url:HttpUrl=Form(...), job_desc:str=Form(...),token:str=Depends(get_access_token),db:Session=Depends(get_db)):
+async def interview_prep(request:Request,resume:UploadFile=File(...), url:HttpUrl=Form(...), job_desc:str=Form(...),token:str=Depends(get_access_token),db:Session=Depends(get_db)):
     if resume.content_type!="application/pdf":
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,detail="Only pdf files are allowed")
     size=0
@@ -42,7 +42,7 @@ async def interview_prep(resume:UploadFile=File(...), url:HttpUrl=Form(...), job
 
 @router.get("/")
 @limiter.limit("5/minute")
-def all_prep(token:str=Depends(get_access_token),db:Session=Depends(get_db)):
+def all_prep(request:Request,token:str=Depends(get_access_token),db:Session=Depends(get_db)):
     payload = AuthService.verify_token(token, "access")
     if not payload:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorised Access")
@@ -53,7 +53,7 @@ def all_prep(token:str=Depends(get_access_token),db:Session=Depends(get_db)):
 
 @router.get("/{prep_id}")
 @limiter.limit("5/minute")
-def get_prep(prep_id:int,token:str=Depends(get_access_token),db:Session=Depends(get_db)):
+def get_prep(request:Request,prep_id:int,token:str=Depends(get_access_token),db:Session=Depends(get_db)):
     payload = AuthService.verify_token(token, "access")
     if not payload:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorised Access")
