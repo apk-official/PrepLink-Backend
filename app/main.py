@@ -18,7 +18,11 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI(title="PrepLink", version="1.0.0")
 
 app.state.limiter = limiter
-app.add_middleware(SessionMiddleware, secret_key=settings.SECRET_KEY)
+app.add_middleware(SessionMiddleware,
+                   secret_key=settings.SECRET_KEY,
+                   same_site="lax",  # or "none" if cross-site issues
+                   https_only=True,
+                   )
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 app.add_middleware(SlowAPIMiddleware)
 origins = [

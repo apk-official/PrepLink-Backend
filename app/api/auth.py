@@ -71,8 +71,7 @@ async def google_callback(request:Request,db:Session=Depends(get_db)):
         })
     except Exception as e:
         print(f"Authentication error: {e}")
-        redirect_url = f"{settings.FRONTEND_URL}"
-        return RedirectResponse(url=redirect_url)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,detail="Authentication Error")
 
 
 
