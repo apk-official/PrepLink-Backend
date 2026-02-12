@@ -13,7 +13,7 @@ from app.core.config import settings
 from app.db.base import Base
 from app.db.sessions import engine
 from app.core.ratelimit import limiter
-
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="PrepLink", version="1.0.0")
 
@@ -21,6 +21,17 @@ app.state.limiter = limiter
 app.add_middleware(SessionMiddleware, secret_key=settings.SECRET_KEY)
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 app.add_middleware(SlowAPIMiddleware)
+origins = [
+    "http://localhost:8000",
+    "https://app.preplinkapp.com"
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],      # or ["GET","POST","PUT","DELETE"]
+    allow_headers=["*"],      # includes Authorization
+)
 
 ##API routers with versioned(v1) URL prefixes
 app.include_router(auth_router,prefix="/api/v1")
