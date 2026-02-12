@@ -22,13 +22,11 @@ class Settings(BaseSettings):
     # --------------------------
     GOOGLE_CLIENT_ID:str
     GOOGLE_CLIENT_SECRET:str
+    GOOGLE_REDIRECT_URI: str
 
-    class Settings(BaseSettings):
-        GOOGLE_CLIENT_REDIRECT_URI: str
-
-        @property
-        def google_redirect_uriv(self) -> str:
-            return f"{self.GOOGLE_CLIENT_REDIRECT_URI}/api/v1/auth/google/callback"
+    @property
+    def GOOGLE_REDIRECT_URI(self) -> str:
+        return f"{self.GOOGLE_REDIRECT_URI}/api/v1/auth/google/callback"
 
     FRONTEND_URL:str="https://app.preplinkapp.com"
 
