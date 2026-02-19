@@ -26,7 +26,7 @@ app.add_middleware(SessionMiddleware,
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 app.add_middleware(SlowAPIMiddleware)
 origins = [
-    "http://localhost:8000",
+    "http://localhost:5173",
     "https://app.preplinkapp.com"
 ]
 app.add_middleware(
