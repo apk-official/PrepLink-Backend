@@ -64,11 +64,13 @@ async def google_callback(request:Request,db:Session=Depends(get_db)):
 
         AuthService.update_user_refresh_token(db,user.user_id,refresh_token)
         # Redirect to frontend with tokens
-        redirect_url =settings.FRONTEND_URL
-        return JSONResponse({
-            "access_token":access_token,
-            "refresh_token":refresh_token,
-        })
+        redirect_url = (
+            f"{settings.FRONTEND_URL}/auth/callback"
+            f"?access_token={access_token}"
+            f"&refresh_token={refresh_token}"
+        )
+
+        return RedirectResponse(url=redirect_url, status_code=302)
     except Exception as e:
         print(f"Authentication error: {e}")
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,detail="Authentication Error")
