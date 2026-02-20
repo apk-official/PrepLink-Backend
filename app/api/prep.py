@@ -41,7 +41,7 @@ async def interview_prep(request:Request,resume:UploadFile=File(...), url:HttpUr
     return result
 
 @router.get("/")
-@limiter.limit("5/minute")
+@limiter.limit("30/minute")
 def all_prep(request:Request,token:str=Depends(get_access_token),db:Session=Depends(get_db)):
     payload = AuthService.verify_token(token, "access")
     if not payload:
@@ -52,7 +52,7 @@ def all_prep(request:Request,token:str=Depends(get_access_token),db:Session=Depe
 
 
 @router.get("/{prep_id}")
-@limiter.limit("5/minute")
+@limiter.limit("60/minute")
 def get_prep(request:Request,prep_id:int,token:str=Depends(get_access_token),db:Session=Depends(get_db)):
     payload = AuthService.verify_token(token, "access")
     if not payload:

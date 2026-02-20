@@ -17,7 +17,7 @@ from app.services.auth_services import AuthService
 router = APIRouter(prefix='/user', tags=['user'])
 
 @router.get("/",status_code=status.HTTP_200_OK)
-@limiter.limit("5/minute")
+@limiter.limit("10/minute")
 async def user(request:Request,db:Session=Depends(get_db)):
     """Get current user information"""
     auth_header=request.headers.get("Authorization")
