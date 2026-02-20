@@ -62,7 +62,7 @@ def get_prep(request:Request,prep_id:int,token:str=Depends(get_access_token),db:
     tips=db.query(InterviewTips).filter(InterviewTips.project_id==prep_id).all()
     about_company=db.query(AboutCompany).filter(AboutCompany.project_id==prep_id).all()
 
-    return {"project":project,
+    return {
             "interview_question":interview_question,
             "interview_tips":tips,
             "about_company":about_company
