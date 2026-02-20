@@ -24,8 +24,8 @@ class Settings(BaseSettings):
     GOOGLE_CLIENT_SECRET:str
     GOOGLE_REDIRECT_URI: str
 
-    # FRONTEND_URL:str="https://app.preplinkapp.com"
-    FRONTEND_URL:str="http://localhost:5173"
+    FRONTEND_URL:str="https://app.preplinkapp.com"
+
 
     MAX_FILE_SIZE:int=7*1024*1024
     # --------------------------

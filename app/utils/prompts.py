@@ -111,7 +111,7 @@ You will be provided with three data blocks:
 ## TASK
 1. Analyze the Job Description to determine your "Interviewer Role."
 2. Generate 4 categories of Q&A (General, Technical, Behavioural, Other) tailored to the Resume vs Job gap.
-3. Extract Company Mission, Vision, and Additional context from <COMPANY_DATA>.
+3. Extract Company About, Mission, Vision, and Additional context from <COMPANY_DATA>.
 
 
 ## TASK REQUIREMENTS
@@ -249,6 +249,7 @@ Return strictly valid JSON matching this schema:
     {"tip": "..."},
   ],
   "About_company": {
+  "about": {"content":"...", "source_url":"..."},
     "mission": {"content":"...", "source_url":"..."},
     "vision": {"content":"...", "source_url":"..."},
     "additional": {"content":"...", "source_url":"..."}

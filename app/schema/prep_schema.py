@@ -16,6 +16,7 @@ class CompanyMission(BaseModel):
     source_url: str
 
 class AboutCompany(BaseModel):
+    about:CompanyMission
     mission: CompanyMission
     vision: CompanyMission
     additional: CompanyMission
