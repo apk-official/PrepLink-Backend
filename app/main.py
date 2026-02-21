@@ -15,7 +15,7 @@ from app.db.sessions import engine
 from app.core.ratelimit import limiter
 from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI(title="PrepLink", version="1.0.0")
+app = FastAPI(title="PrepLink", version="1.0.0",redirect_slashes=False)
 
 app.state.limiter = limiter
 app.add_middleware(SessionMiddleware,
@@ -26,7 +26,6 @@ app.add_middleware(SessionMiddleware,
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 app.add_middleware(SlowAPIMiddleware)
 origins = [
-    "http://localhost:5173",
     "https://app.preplinkapp.com"
 ]
 app.add_middleware(
