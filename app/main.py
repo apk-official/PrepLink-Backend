@@ -15,7 +15,7 @@ from app.db.sessions import engine
 from app.core.ratelimit import limiter
 from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI(title="PrepLink", version="1.0.0",redirect_slashes=False)
+app = FastAPI(title="PrepLink", version="1.0.0")
 
 app.state.limiter = limiter
 app.add_middleware(SessionMiddleware,
