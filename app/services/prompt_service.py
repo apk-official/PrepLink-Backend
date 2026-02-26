@@ -13,11 +13,23 @@ client = genai.Client(api_key=settings.GOOGLE_GEMINI_API_KEY)
 class PromptService:
     @staticmethod
     def tos_prompt(tos_data:dict):
-        if not tos_data.get("pages"):
+        pages = tos_data.get("pages") or []
+        if not pages:
             return True
+        base_url = tos_data.get("base_url", "")
+        tos_text = "\n\n".join(
+            f"[{p.get('key', 'legal')}] {p.get('url', '')}\n{(p.get('text') or '')}"
+            for p in pages
+        )
+        user_text = (
+            f"Base URL: {base_url}\n\n"
+            "Extracted legal/ToS/privacy/cookie text:\n"
+            f"{tos_text[:60000]}\n\n"
+            "Decide if scraping is permitted under the rules above."
+        )
         response = client.models.generate_content(
             model="gemini-2.5-flash",
-            contents=tos_data,
+            contents=[user_text],
             config=GenerateContentConfig(
                 system_instruction=TOS_SYSTEM_PROMPT,
                 temperature=0.0,
