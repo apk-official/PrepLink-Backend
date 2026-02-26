@@ -46,6 +46,11 @@ class InterviewPrep:
 
         else:
             allow_scrape_tos = await InterviewPrep.site_complaince(url)
+            if not allow_scrape_tos:
+                raise HTTPException(
+                    status_code=status.HTTP_403_FORBIDDEN,
+                    detail="Scraping not allowed by the site's Terms/Privacy policy."
+                )
             if allow_scrape_tos:
                 scraped =await get_scraped_data(url)
                 scraped_data = scraped.get("company_data",scraped)
